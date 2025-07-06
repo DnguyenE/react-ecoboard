@@ -22,6 +22,7 @@ export default function SensorChart() {
         airQuality: true
     });
 
+    const [sensorData, setSensorData] = useState<SensorData[]>([]);
     const formatTime = (date = new Date()) => {
       return date.toLocaleTimeString('en-US', {
         hour12: false,
@@ -37,13 +38,13 @@ export default function SensorChart() {
         {
           label: 'Temperature (°C)',
           data: [],
-          borderColor: 'rgb(0, 0, 139)', // Dark blue color
+          borderColor: 'rgb(255, 99, 132)', // Dark blue color
           tension: 0.1
         },
         {
           label: 'Humidity (%)',
           data: [],
-          borderColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 255, 255)',
           tension: 0.1
         },
         {

@@ -1,7 +1,7 @@
 export const SidebarData = [
     {
         title: "Dashboard",
-        path: "/Dashboard",
+        path: "/",
         // icon: <i className="fas fa-home"></i>
     },
     {
