@@ -8,7 +8,7 @@ function Dashboard() {
     <div className="dashboard">
       <Sidebar />
       <div className="main-content">
-        <h1>Environmental Dashboard</h1>
+        <h1>Real Time Environmental Dashboard</h1>
         <div className="chart-container">
           <SensorChart />
         </div>
