@@ -22,7 +22,6 @@ export default function SensorChart() {
         airQuality: true
     });
 
-    const [sensorData, setSensorData] = useState<SensorData[]>([]);  //using the sensor data template and storing it in sensorData
     const formatTime = (date = new Date()) => {
       return date.toLocaleTimeString('en-US', {
         hour12: false,
@@ -58,8 +57,6 @@ export default function SensorChart() {
 
     // Callback to handle updates from the simulator
     const handleDataUpdate = useCallback((updates: SensorData[]) => {
-      setSensorData(prev => [...prev, ...updates].slice(-20)); // Keep last 20 updates
-      
       // Update chart data with the latest readings
       if (updates.length > 0) {
         const latest = updates[updates.length - 1];
