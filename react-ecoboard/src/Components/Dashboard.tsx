@@ -1,14 +1,16 @@
 import React from 'react';
 import "./Dashboard.css";
-import Sidebar from './Sidebar';
 import SensorChart from './SensorChart.tsx';
+import logo from "../images/react-logo.png";
 
 function Dashboard() {
   return (
     <div className="dashboard">
-      <Sidebar />
       <div className="main-content">
-        <h1>Real Time Environmental Dashboard</h1>
+        <div className="logo">
+                <img src={logo} alt="EcoBoard Logo" className="logo-img" />
+                <h1>EcoBoard</h1>
+        </div>
         <div className="chart-container">
           <SensorChart />
         </div>

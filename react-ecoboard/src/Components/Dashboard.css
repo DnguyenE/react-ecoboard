@@ -1,40 +1,63 @@
 @import './variables.css';
 
 .dashboard {
-  background-color: var(--neutral800);
   min-height: 100vh;
   width: 100%;
   margin: 0;
   padding: 0;
-  position: relative;
+  background-color: var(--neutral800);
   box-sizing: border-box;
   overflow-x: hidden;
-  padding-left: 15vw; /* Match sidebar width */
 }
 
 .main-content {
-  padding: 2rem;
-  color: white;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  width: 100%;
+  padding: 2rem;
+  color: white;
   box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.logo-img {
+  height: 50px;
+  width: auto;
+}
+
+.logo h1 {
+  margin: 0;
+  color: white;
+  font-size: 1.8rem;
 }
 
 .chart-container {
   background: #1e293b;
   border-radius: 12px;
   padding: 1.5rem;
-  margin-top: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   color: #e2e8f0;
-  height: 60vh;
   min-height: 500px;
-  max-height: 70vh;
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 200px);
+  overflow: hidden;
+}
+
+h1 {
+  color: white;
+  margin: 0 0 1.5rem 0;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .chart-wrapper {
