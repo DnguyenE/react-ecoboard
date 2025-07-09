@@ -15,14 +15,14 @@ interface SensorData {
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);  //ensure to register for rendering
 
 export default function SensorChart() {
-    // State to track which charts are visible
+    // State to track which charts are visible, used for 
     const [filters, setFilters] = useState({
         temperature: true,
         humidity: true,
         airQuality: true
     });
 
-    const [sensorData, setSensorData] = useState<SensorData[]>([]);
+    const [sensorData, setSensorData] = useState<SensorData[]>([]);  //using the sensor data template and storing it in sensorData
     const formatTime = (date = new Date()) => {
       return date.toLocaleTimeString('en-US', {
         hour12: false,
@@ -33,7 +33,7 @@ export default function SensorChart() {
     };
 
     const [chartData, setChartData] = useState({  //this is the data that is displayed on the chart
-      labels: Array(7).fill('').map(() => formatTime()),
+      labels: Array(10).fill('').map(() => formatTime()),
       datasets: [
         {
           label: 'Temperature (°C)',
@@ -66,7 +66,7 @@ export default function SensorChart() {
         const now = new Date();
         
         setChartData(prev => {
-          // Add new time to labels, keeping only last 7 entries
+          // Add new time to labels, keeping only last 10 entries
           const newLabels = [...prev.labels.slice(1), formatTime(now)];
           
           return {
@@ -75,15 +75,15 @@ export default function SensorChart() {
             datasets: [
               {
                 ...prev.datasets[0],
-                data: [...prev.datasets[0].data.slice(-6), latest.temperature]
+                data: [...prev.datasets[0].data.slice(-10), latest.temperature]  //slice removed that last entry and keeps the most recent 10
               },
               {
                 ...prev.datasets[1],
-                data: [...prev.datasets[1].data.slice(-6), latest.humidity]
+                data: [...prev.datasets[1].data.slice(-10), latest.humidity]
               },
               {
                 ...prev.datasets[2],
-                data: [...prev.datasets[2].data.slice(-6), latest.airQuality]
+                data: [...prev.datasets[2].data.slice(-10), latest.airQuality]
               }
             ]
           };
@@ -94,7 +94,7 @@ export default function SensorChart() {
     // Set up the data simulation when component mounts
     useEffect(() => {
       // Start simulation with 1 sensor, updating every 2 seconds
-      const cleanup = SimulateRealTimeData(1, 2000, handleDataUpdate);
+      const cleanup = SimulateRealTimeData(1, 1000, handleDataUpdate);
       
       // Clean up interval on unmount
       return () => {
@@ -102,6 +102,7 @@ export default function SensorChart() {
       };
     }, [handleDataUpdate]);
 
+    //chart options for customizing the chart
     const options = {
       responsive: true,
       maintainAspectRatio: false,
@@ -154,6 +155,7 @@ export default function SensorChart() {
     const filteredChartData = {
         ...chartData,
         datasets: chartData.datasets.filter(dataset => {
+          //filters out the datasets that are not selected
             if (dataset.label.includes('Temperature') && !filters.temperature) return false;
             if (dataset.label.includes('Humidity') && !filters.humidity) return false;
             if (dataset.label.includes('Air Quality') && !filters.airQuality) return false;
@@ -169,7 +171,7 @@ export default function SensorChart() {
         }));
     };
 
-    return (
+    return (  //renders the chart with the toggles and the chart
         <div className="chart-container">
             <h1 style={{ color: "white" }}>Real-time Sensor Data</h1>
             <div className="chart-filters">
